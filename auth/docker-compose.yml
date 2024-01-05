@@ -1,0 +1,11 @@
+version: '3.8'
+
+services:
+  auth:
+    build: .
+    container_name: auth
+    networks:
+      - kafka_mylocal
+networks:
+  kafka_mylocal:
+    external: true

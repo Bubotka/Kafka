@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+package geo_provider;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "../../pkg/go/user";
+
+service Userer {
+  rpc Profile (ProfileRequest) returns (ProfileResponse) {}
+  rpc CheckUser (UserRequest) returns (google.protobuf.Empty) {}
+  rpc List (google.protobuf.Empty) returns (ListResponse) {}
+  rpc Create (UserRequest) returns (google.protobuf.Empty) {}
+}
+
+message ProfileRequest {
+  string email =1;
+}
+
+message ProfileResponse {
+  User user =1;
+}
+
+message UserRequest {
+ User user =1;
+}
+
+message User{
+  string email = 1;
+  string password = 2;
+}
+
+message ListResponse {
+  repeated User users =1;
+}
+

@@ -1,0 +1,13 @@
+version: '3.8'
+
+services:
+  notify:
+    container_name: notify
+    build: .
+    environment:
+      BROKER: ${BROKER}
+    networks:
+      - kafka_mylocal
+networks:
+  kafka_mylocal:
+    external: true

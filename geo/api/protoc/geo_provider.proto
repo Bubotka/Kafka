@@ -1,0 +1,54 @@
+syntax = "proto3";
+
+package geo_provider;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "../../pkg/go/user";
+
+service GeoProvider {
+  rpc ListLevenshtein (ListLevenshteinRequest) returns (ListLevenshteinResponse) {}
+  rpc Create (CreateRequest) returns (google.protobuf.Empty) {}
+  rpc Search (SearchRequest) returns (SearchResponse) {}
+  rpc GeoCode (GeoRequest) returns (GeoResponse) {}
+}
+message ListLevenshteinRequest {
+  string column = 1;
+  string text = 2;
+}
+
+message ListLevenshteinResponse {
+  SearchHistoryAddress sha = 1;
+}
+
+message SearchHistoryAddress {
+  int32 id = 1;
+  string search_request = 2;
+  string address_response = 3;
+}
+
+message SearchRequest {
+  string place = 1;
+}
+
+message CreateRequest {
+  SearchHistoryAddress sha = 1;
+}
+
+message SearchResponse {
+  repeated AddressElementSearch elements = 1;
+}
+
+message GeoRequest {
+  string coordinates = 1;
+}
+
+message GeoResponse {
+  repeated AddressElementSearch elements = 1;
+}
+
+message AddressElementSearch {
+  string result = 1;
+  string geo_lat = 2;
+  string geo_lon = 3;
+}

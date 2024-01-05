@@ -1,0 +1,22 @@
+syntax = "proto3";
+
+package geo_provider;
+
+import "google/protobuf/empty.proto";
+
+option go_package = "../../pkg/go/auth";
+
+service Auth {
+  rpc Register (UserAuthRequest) returns (google.protobuf.Empty) {}
+  rpc Login (UserAuthRequest) returns (LoginResponse) {}
+}
+
+message UserAuthRequest {
+  string email = 1;
+  string password = 2;
+}
+
+message LoginResponse {
+  string token = 1;
+}
+
